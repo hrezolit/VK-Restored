@@ -13,12 +13,12 @@ class SelectedGroupViewController: UIViewController {
     @IBOutlet weak var selectedGroupLabel: UILabel!
     
     var groupTitle = ""
-    var groupImage = UIImage(systemName: "eye.slash")
+    var groupImage = ""
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        selectedGroupImage.image = groupImage
+        selectedGroupImage.loadImage(with: groupImage)
         selectedGroupLabel.text = groupTitle
         selectedGroupLabel.numberOfLines = 1
     }

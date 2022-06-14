@@ -12,7 +12,7 @@ class PhotoSwipeViewController: UIViewController {
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondImageView: UIImageView!
     
-    var photos = [PhotosData]()
+    var photos = [Size]()
     
     //MARK: - checking photo index
     var curentPhotoIndex: Int?
@@ -29,7 +29,7 @@ class PhotoSwipeViewController: UIViewController {
         return previousIndex > -1 ? previousIndex : nil
     }
     
-    var curentPhoto: PhotosData? {
+    var curentPhoto: Size? {
         guard let index = curentPhotoIndex else { return nil }
         return photos[index]
     }

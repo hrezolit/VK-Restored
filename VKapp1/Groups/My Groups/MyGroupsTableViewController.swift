@@ -101,7 +101,8 @@ class MyGroupsTableViewController: UITableViewController {
                 let selectedGroupVC = segue.destination as? SelectedGroupViewController
                 let subscribedGroup = groups[indexPath.row]
                 let groupImage = subscribedGroup.photo100
-                selectedGroupVC?.selectedGroupImage.loadImage(with: groupImage)
+                print("DBG", groupImage)
+                selectedGroupVC?.groupImage = groupImage
                 selectedGroupVC?.groupTitle = subscribedGroup.name
             }
         } else if segue.identifier == "newGroups" {

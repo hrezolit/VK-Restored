@@ -58,7 +58,11 @@ class PhotosCollectionViewController: UICollectionViewController {
     //MARK: - prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let swipeViewController = segue.destination as? PhotoSwipeViewController {
-            swipeViewController.photos = photoData
+            let photoR = photoData
+                .map { $0.sizes }
+                .flatMap { $0 }
+                .filter { $0.type == "r" }
+            swipeViewController.photos = photoR
             navigationController?.navigationBar.tintColor = .clear
             navigationController?.navigationItem.titleView?.backgroundColor = .clear
             
