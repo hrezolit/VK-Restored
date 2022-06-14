@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="20037" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="20020"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="FriendsAlphabetHeaderView" customModule="VKapp1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Nc4-tQ-uS2">
+                    <rect key="frame" x="0.0" y="0.0" width="414" height="108"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Letter" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iOk-DJ-qqX">
+                            <rect key="frame" x="5" y="0.0" width="409" height="108"/>
+                            <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="25"/>
+                            <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstItem="iOk-DJ-qqX" firstAttribute="leading" secondItem="Nc4-tQ-uS2" secondAttribute="leading" constant="5" id="IIf-yp-N5t"/>
+                        <constraint firstAttribute="bottom" secondItem="iOk-DJ-qqX" secondAttribute="bottom" id="XaA-Tc-dgZ"/>
+                        <constraint firstItem="iOk-DJ-qqX" firstAttribute="top" secondItem="Nc4-tQ-uS2" secondAttribute="top" id="jAe-UD-NQk"/>
+                        <constraint firstAttribute="trailing" secondItem="iOk-DJ-qqX" secondAttribute="trailing" id="vhY-ev-1fa"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="Nc4-tQ-uS2" secondAttribute="bottom" id="DlU-0Y-0Yc"/>
+                <constraint firstItem="Nc4-tQ-uS2" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="Ihm-Mm-TvC"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Nc4-tQ-uS2" secondAttribute="trailing" id="QM6-UY-fxJ"/>
+                <constraint firstItem="Nc4-tQ-uS2" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="fvw-Rw-kSr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="backGround" destination="Nc4-tQ-uS2" id="Cwk-Of-FBx"/>
+                <outlet property="letterLabel" destination="iOk-DJ-qqX" id="vSh-NJ-Fau"/>
+            </connections>
+            <point key="canvasLocation" x="253.62318840579712" y="103.125"/>
+        </view>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
