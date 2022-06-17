@@ -46,26 +46,21 @@ enum TypeEnum: String, Codable {
 }
 
 
+import RealmSwift
 
+class GResponse: Object, Decodable {
+    let response: GroupsResponse
+}
 
-//class GroupsResponse: Decodable {
-//    let items: [Groups]
-//}
-//
-//class Groups: Decodable {
-//    var id = 0
-//    var description = ""
-//    var membersCount = 0
-//    var name = ""
-//    var type = ""
-//    var photo100 = ""
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case description
-//        case membersCount = "members_count"
-//        case name
-//        case type
-//        case photo100 = "photo_100"
-//    }
-//}
+class GroupsResponse: Object, Decodable {
+    let items: [GroupsList]
+}
+
+class GroupsList: Object, Decodable {
+    var id = 0
+    var descriptions = ""
+    var membersCount = 0
+    var name = ""
+    var type = ""
+    var photo100 = ""
+}

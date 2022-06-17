@@ -51,35 +51,20 @@ struct UserData: Codable {
     }
 }
 
+import RealmSwift
 
-//class FLResponse: Decodable {
-//    let response: FriendsPhotosResponse
-//}
-//
-//class FriendsListResponse: Decodable {
-//    let items: [FriendsList]
-//}
-//
-//class FriendsList: Decodable {
-//    var id = 0
-//    var birthday = ""
-//    var photo100 = ""
-//    var firstName = ""
-//    var lastName = ""
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case birthday = "bdate"
-//        case photo100 = "photo_100"
-//        case firstName = "first_name"
-//        case lastName = "last_name"
-//
-//    }
-//
-//    convenience required init(from decoder: Decoder) throws {
-//        self.init()
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        self.
-//    }
-//
-//}
+class FResponse: Object, Decodable {
+    let response: FriendsListResponse
+}
+
+class FriendsListResponse: Object, Decodable {
+    let items: [FriendsList]
+}
+
+class FriendsList: Object, Decodable {
+    var id = 0
+    var birthday = ""
+    var photo100 = ""
+    var firstName = ""
+    var lastName = ""
+}

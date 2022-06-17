@@ -46,9 +46,10 @@ class PhotosCollectionViewController: UICollectionViewController {
             .map { $0.sizes }
             .flatMap { $0 }
             .filter { $0.type == "r" }
+        let likes = photoData.map {$0.likes }.flatMap { $0 }
         
-        cell?.friendPhotos.loadImage(with: photoR[indexPath.item].url)
-//        cell?.likeControl.isSelected = photoR.isLiked
+//        cell?.friendPhotos.loadImage(with: photoR[indexPath.item].url)
+//        cell?.likeControl.isSelected = likes
 //        cell?.markedAsLiked = { isSelected in
 //            photoData[self.friendIndex].likes[indexPath.row] = isSelected
 //        }

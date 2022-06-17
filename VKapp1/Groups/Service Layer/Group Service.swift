@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// /// class for requesting and extracting group data
 final class GroupService {
@@ -16,6 +17,20 @@ final class GroupService {
         let session = URLSession(configuration: config)
         return session
     }()
+    
+    /// Preparing functional for saving data in Ralm class
+    /// - Parameter friendsData: model for Realm
+    func save(_ groupsData: [GroupsList]) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.add(groupsData)
+            try realm.commitWrite()
+        } catch {
+            print("DBG", error)
+        }
+        
+    }
 
     /// Fetching group data
     /// - Parameter completion: closure for extracting result

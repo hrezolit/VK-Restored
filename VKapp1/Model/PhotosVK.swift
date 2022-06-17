@@ -97,43 +97,25 @@ struct Size: Codable {
 
 
 
+import RealmSwift
 
-//class FPResponse: Decodable {
-//    let response: FriendsPhotosResponse
-//}
-//
-//class FriendsPhotosResponse: Decodable {
-//    let items: [FriendsPhotos]
-//}
+class FPResponse: Object, Decodable {
+    let response: FriendsPhotosResponse
+}
 
-//class FriendsPhotos: Decodable {
-//    var albumID = 0
-//    var ownerID = 0
-//    var photoID = 0
-//    var imageURL = ""
-//    var sizeType = ""
-//    var likesCount = 0
-//    var userLike = 0
-//
-//    enum CodingKeys: String, CodingKey {
-//        case albumID = "album_id"
-//        case ownerID = "owner_id"
-//        case photoID = "id"
-//        case sizes
-//        case likes
-//    }
-//
-//    enum SizesKey: String, CodingKey {
-//        case imageURL = "url"
-//        case sizeType = "type"
-//    }
-//
-//    enum LikeKeys: String, CodingKey {
-//        case likesCount = "count"
-//        case userLike = "user_likes"
-//    }
-//
-//}
+class FriendsPhotosResponse: Object, Decodable {
+    let items: [PhotosList]
+}
+
+class PhotosList: Object, Decodable {
+    var albumID = 0
+    var ownerID = 0
+    var photoID = 0
+    var imageURL = ""
+    var sizeType = ""
+    var likesCount = 0
+    var userLike = 0
+}
 
 
 

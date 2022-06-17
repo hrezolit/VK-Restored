@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// class for requesting and extracting friends data
 final class FriendService {
@@ -16,7 +17,23 @@ final class FriendService {
         let session = URLSession(configuration: config)
         return session
     }()
-
+    
+    
+    /// Preparing functional for saving data in Ralm class
+    /// - Parameter friendsData: model for Realm
+    func save(_ friendsData: [FriendsList]) {
+        do {
+            let realm = try Realm()
+            realm.beginWrite()
+            realm.add(friendsData)
+            try realm.commitWrite()
+        } catch {
+            print("DBG", error)
+        }
+        
+    }
+    
+    
     /// Fetching friends data
     /// - Parameter completion: closure for extracting result
     func loadFriendVK(completion: @escaping (FriendsResult) -> ()) {
