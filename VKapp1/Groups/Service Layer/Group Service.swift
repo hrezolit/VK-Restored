@@ -8,7 +8,7 @@
 import Foundation
 import RealmSwift
 
-/// /// class for requesting and extracting group data
+/// class for requesting and extracting group data
 final class GroupService {
     typealias GroupResult = Result<[GroupData], Constants.Service.ServiceError>
 
@@ -18,9 +18,9 @@ final class GroupService {
         return session
     }()
     
-    /// Preparing functional for saving data in Ralm class
-    /// - Parameter friendsData: model for Realm
-    func save(_ groupsData: [GroupsList]) {
+    /// Preparing functional for saving data in Realm class
+    /// - Parameter groupsData: model for Realm
+    func save(_ groupsData: GroupsList) {
         do {
             let realm = try Realm()
             realm.beginWrite()
@@ -29,7 +29,6 @@ final class GroupService {
         } catch {
             print("DBG", error)
         }
-        
     }
 
     /// Fetching group data

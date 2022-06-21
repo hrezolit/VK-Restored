@@ -99,14 +99,6 @@ struct Size: Codable {
 
 import RealmSwift
 
-class FPResponse: Object, Decodable {
-    let response: FriendsPhotosResponse
-}
-
-class FriendsPhotosResponse: Object, Decodable {
-    let items: [PhotosList]
-}
-
 class PhotosList: Object, Decodable {
     var albumID = 0
     var ownerID = 0

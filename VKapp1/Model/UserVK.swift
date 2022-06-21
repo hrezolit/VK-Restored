@@ -53,18 +53,11 @@ struct UserData: Codable {
 
 import RealmSwift
 
-class FResponse: Object, Decodable {
-    let response: FriendsListResponse
-}
-
-class FriendsListResponse: Object, Decodable {
-    let items: [FriendsList]
-}
-
 class FriendsList: Object, Decodable {
-    var id = 0
-    var birthday = ""
-    var photo100 = ""
-    var firstName = ""
-    var lastName = ""
+    @objc dynamic var id: Int = 0
+    @objc dynamic var birthday: String = ""
+    @objc dynamic var photo100: String = ""
+    @objc dynamic var firstName: String = ""
+    @objc dynamic var lastName: String = ""
+    
 }

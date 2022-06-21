@@ -11,7 +11,7 @@ import RealmSwift
 /// class for requesting and extracting friends data
 final class FriendService {
     typealias FriendsResult = Result<[UserData], Constants.Service.ServiceError>
-
+    
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
@@ -21,7 +21,7 @@ final class FriendService {
     
     /// Preparing functional for saving data in Ralm class
     /// - Parameter friendsData: model for Realm
-    func save(_ friendsData: [FriendsList]) {
+    func saveToRealm(_ friendsData: FriendsList) {
         do {
             let realm = try Realm()
             realm.beginWrite()
@@ -30,7 +30,6 @@ final class FriendService {
         } catch {
             print("DBG", error)
         }
-        
     }
     
     
@@ -40,12 +39,12 @@ final class FriendService {
         guard let token = MySession.shared.token else {
             return completion(.failure(.notConfigureURL))
         }
-
+        
         let params: [String: String] = [
             "v" : "5.131",
-            "fields": "bdate, photo_100, online"
+            "fields": "bdate, photo_100"
         ]
-
+        
         do {
             let url: URL = try .configureUrl(token: token,
                                              method: .friendsGet,

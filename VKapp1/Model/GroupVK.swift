@@ -48,19 +48,11 @@ enum TypeEnum: String, Codable {
 
 import RealmSwift
 
-class GResponse: Object, Decodable {
-    let response: GroupsResponse
-}
-
-class GroupsResponse: Object, Decodable {
-    let items: [GroupsList]
-}
-
 class GroupsList: Object, Decodable {
-    var id = 0
-    var descriptions = ""
-    var membersCount = 0
-    var name = ""
-    var type = ""
-    var photo100 = ""
+    @objc dynamic var id = 0
+    @objc dynamic var descriptions = ""
+    @objc dynamic var membersCount = 0
+    @objc dynamic var name = ""
+    @objc dynamic var type = ""
+    @objc dynamic var photo100 = ""
 }
