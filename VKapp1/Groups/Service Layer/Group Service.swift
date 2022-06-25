@@ -20,7 +20,7 @@ final class GroupService {
     
     /// Preparing functional for saving data in Realm class
     /// - Parameter groupsData: model for Realm
-    func save(_ groupsData: GroupsList) {
+    func save(_ groupsData: [GroupData]) {
         do {
             let realm = try Realm()
             realm.beginWrite()

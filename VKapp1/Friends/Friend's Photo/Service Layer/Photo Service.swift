@@ -20,9 +20,10 @@ final class PhotoService {
     
     /// Preparing functional for saving data in Realm class
     /// - Parameter photoData: model for Realm
-    func save(_ photoData: PhotosList) {
+    func save(_ photoData: [PhotosData]) {
         do {
             let realm = try Realm()
+            print(realm.configuration.fileURL ?? "")
             realm.beginWrite()
             realm.add(photoData)
             try realm.commitWrite()

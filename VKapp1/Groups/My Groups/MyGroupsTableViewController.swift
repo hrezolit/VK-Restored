@@ -34,6 +34,8 @@ class MyGroupsTableViewController: UITableViewController {
             }
         }
         
+        
+        
         self.navigationItem.leftBarButtonItem = self.editButtonItem
         editButtonItem.tintColor = UIColor(named: "acidGreen")
         searchBar.delegate = self

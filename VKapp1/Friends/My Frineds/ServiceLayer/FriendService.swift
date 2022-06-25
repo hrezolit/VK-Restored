@@ -10,7 +10,7 @@ import RealmSwift
 
 /// class for requesting and extracting friends data
 final class FriendService {
-    typealias FriendsResult = Result<[UserData], Constants.Service.ServiceError>
+    typealias FriendsResult = Result<[FriendsData], Constants.Service.ServiceError>
     
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
@@ -21,9 +21,10 @@ final class FriendService {
     
     /// Preparing functional for saving data in Ralm class
     /// - Parameter friendsData: model for Realm
-    func saveToRealm(_ friendsData: FriendsList) {
+    func saveToRealm(_ friendsData: [FriendsData]) {
         do {
             let realm = try Realm()
+            print("REALM FILE LOCATION:", realm.configuration.fileURL ?? "")
             realm.beginWrite()
             realm.add(friendsData)
             try realm.commitWrite()
@@ -42,7 +43,7 @@ final class FriendService {
         
         let params: [String: String] = [
             "v" : "5.131",
-            "fields": "bdate, photo_100"
+            "fields": "photo_100"
         ]
         
         do {
@@ -62,7 +63,7 @@ final class FriendService {
                 let decoder = JSONDecoder()
                 
                 do {
-                    let result = try decoder.decode(UserVK.self, from: data)
+                    let result = try decoder.decode(FResponse.self, from: data)
                     completion(.success(result.response.items))
                     
                 } catch {
