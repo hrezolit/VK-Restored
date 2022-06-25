@@ -9,19 +9,16 @@ import UIKit
 
 struct SortingFriendsForHeader {
     var firstLetter: Character
-    var friends: [UserData]
+    var friends: [FriendsData]
 }
 
 class FrinedsTableViewController: UITableViewController {
-    
-    /// friends count property from Data
-    private var friendsCount: ResponseFriends?
     
     /// service for fetching friend data
     let friendService = FriendService()
     
     /// friends data storage
-    var friendsData = [UserData]()
+    var friendsData = [FriendsData]()
     
     /// calculated property for extracting letters
     var friendFirstLetter: [SortingFriendsForHeader] {
@@ -60,6 +57,7 @@ class FrinedsTableViewController: UITableViewController {
                 return
             }
         }
+        friendService.saveToRealm(friendsData)
         
         let myNib = UINib(nibName: "FriendsAlphabetHeaderView", bundle: .main)
         tableView.register(myNib, forHeaderFooterViewReuseIdentifier: "header")

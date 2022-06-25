@@ -6,72 +6,67 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// model for landing JSON data for photos
-struct PhotosVK: Codable {
+struct PhotosVK: Decodable {
     
     /// response
     let response: ResponsePhotos
 }
 
 /// model for landing JSON data for photos
-struct ResponsePhotos: Codable {
-    
-    /// photos count
-    let count: Int
-    
+struct ResponsePhotos: Decodable {
+
     /// array of photos
     let items: [PhotosData]
-    // MARK: - Response
     
 }
 
 /// model for landing JSON data for photos
-struct PhotosData: Codable {
+class PhotosData: Object, Decodable {
     
-    /// album ID:  "wall" - photos from the wall,  "profile" - profile photos
-    let albumID: Int
+    /// type of album "wall", "page"
+    @objc dynamic var albumID = ""
+
+    /// selected friend's id
+    @objc dynamic var ownerID = 0
     
     /// the date when photo was uploaded
-    let date: Int
+    @objc dynamic var date = 0
     
     /// photo ID
-    let id: Int
+    @objc dynamic var id = 0
     
-    /// album's owner's ID
-    let ownerID: Int?
-    
-    /// the date when photo was uploaded
-    let postID: Int?
-    
+    /// photo likes class with counters of likes
+    @objc dynamic var likes: Likes?
+
     /// size of photo
-    let sizes: [Size]
-    
-    let likes: Likes
-    
-    /// text
-    let text: String
+    var sizes = List<Size>()
     
     enum CodingKeys: String, CodingKey {
-        case albumID = "album_id"
-        case date = "date"
-        case id = "id"
+
         case ownerID = "owner_id"
-        case postID = "post_id"
-        case sizes = "sizes"
+        case albumID = "album_id"
+        case date
+        case id
+        case sizes
         case likes
-        case text = "text"
+    }
+    
+    override class func primaryKey() -> String? {
+        return "id"
     }
 }
 
 /// model for landing JSON data for photos likes
-struct Likes: Codable {
+class Likes: Object, Decodable {
     
     /// like counter
-    let count: Int
+    @objc dynamic var count = 0
     
     /// my likes
-    let userLikes: Int
+    @objc dynamic var userLikes = 0
     
     enum CodingKeys: String, CodingKey {
         case count
@@ -80,60 +75,20 @@ struct Likes: Codable {
 }
 
 /// model for landing JSON data for photos sizes
-struct Size: Codable {
+class Size: Object, Decodable {
     
     ///  photo's height
-    let height: Int
+    @objc dynamic var height = 0
     
     /// photo's url
-    let url: String
+    @objc dynamic var url = ""
     
     /// photo's type
-    let type: String
+    @objc dynamic var type = ""
     
     /// photo's width
-    let width: Int
+    @objc dynamic var width = 0
 }
-
-
-
-
-//class FPResponse: Decodable {
-//    let response: FriendsPhotosResponse
-//}
-//
-//class FriendsPhotosResponse: Decodable {
-//    let items: [FriendsPhotos]
-//}
-
-//class FriendsPhotos: Decodable {
-//    var albumID = 0
-//    var ownerID = 0
-//    var photoID = 0
-//    var imageURL = ""
-//    var sizeType = ""
-//    var likesCount = 0
-//    var userLike = 0
-//
-//    enum CodingKeys: String, CodingKey {
-//        case albumID = "album_id"
-//        case ownerID = "owner_id"
-//        case photoID = "id"
-//        case sizes
-//        case likes
-//    }
-//
-//    enum SizesKey: String, CodingKey {
-//        case imageURL = "url"
-//        case sizeType = "type"
-//    }
-//
-//    enum LikeKeys: String, CodingKey {
-//        case likesCount = "count"
-//        case userLike = "user_likes"
-//    }
-//
-//}
 
 
 

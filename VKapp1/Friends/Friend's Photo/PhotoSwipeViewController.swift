@@ -12,7 +12,7 @@ class PhotoSwipeViewController: UIViewController {
     @IBOutlet weak var firstImageView: UIImageView!
     @IBOutlet weak var secondImageView: UIImageView!
     
-    var photos = [PhotosData]()
+    var photos = [Size]()
     
     //MARK: - checking photo index
     var curentPhotoIndex: Int?
@@ -29,7 +29,7 @@ class PhotoSwipeViewController: UIViewController {
         return previousIndex > -1 ? previousIndex : nil
     }
     
-    var curentPhoto: PhotosData? {
+    var curentPhoto: Size? {
         guard let index = curentPhotoIndex else { return nil }
         return photos[index]
     }
@@ -48,7 +48,7 @@ class PhotoSwipeViewController: UIViewController {
         curentPhotoIndex = photos.isEmpty ? nil : 0
         
         firstImageView.frame = view.bounds
-//        firstImageView.image = curentPhoto?.albumID
+        firstImageView.loadImage(with: curentPhoto?.url ?? "")
         secondImageView.frame = view.bounds
         secondImageView.isHidden = true
         
@@ -81,8 +81,7 @@ class PhotoSwipeViewController: UIViewController {
         }
         
     }
-    
-    
+        
     func swipeToLeft() {
         guard let nextPhotoIndex = nextPhotoIndex else {
             return
@@ -90,7 +89,7 @@ class PhotoSwipeViewController: UIViewController {
         let hiddenImageView = hiddenImageView
         let currentImageView = curentImageView
         
-//        hiddenImageView?.image = UIImage(named: photos[nextPhotoIndex].image)
+        hiddenImageView?.loadImage(with: curentPhoto?.url ?? "")
         hiddenImageView?.frame.origin.x = view.bounds.maxX
         hiddenImageView?.isHidden = false
         
@@ -131,7 +130,7 @@ class PhotoSwipeViewController: UIViewController {
         let hiddenImageView = hiddenImageView
         let currentImageView = curentImageView
         
-//        hiddenImageView?.image = UIImage(named: photos[previousPhotoIndex].image)
+        hiddenImageView?.loadImage(with: curentPhoto?.url ?? "")
         hiddenImageView?.frame.origin.x = -view.bounds.width
         hiddenImageView?.isHidden = false
         

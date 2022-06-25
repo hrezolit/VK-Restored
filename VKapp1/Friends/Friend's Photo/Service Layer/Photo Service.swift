@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// class for requesting and extracting photo data
 final class PhotoService {
@@ -16,6 +17,20 @@ final class PhotoService {
         let session = URLSession(configuration: config)
         return session
     }()
+    
+    /// Preparing functional for saving data in Realm class
+    /// - Parameter photoData: model for Realm
+    func save(_ photoData: [PhotosData]) {
+        do {
+            let realm = try Realm()
+            print(realm.configuration.fileURL ?? "")
+            realm.beginWrite()
+            realm.add(photoData)
+            try realm.commitWrite()
+        } catch {
+            print("DBG", error)
+        }
+    }
     
     /// Fetching photos data
     /// - Parameter completion: closure for extracting result

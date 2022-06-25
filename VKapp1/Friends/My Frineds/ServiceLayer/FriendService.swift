@@ -6,29 +6,46 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// class for requesting and extracting friends data
 final class FriendService {
-    typealias FriendsResult = Result<[UserData], Constants.Service.ServiceError>
-
+    typealias FriendsResult = Result<[FriendsData], Constants.Service.ServiceError>
+    
     private let session: URLSession = {
         let config = URLSessionConfiguration.default
         let session = URLSession(configuration: config)
         return session
     }()
-
+    
+    
+    /// Preparing functional for saving data in Ralm class
+    /// - Parameter friendsData: model for Realm
+    func saveToRealm(_ friendsData: [FriendsData]) {
+        do {
+            let realm = try Realm()
+            print("REALM FILE LOCATION:", realm.configuration.fileURL ?? "")
+            realm.beginWrite()
+            realm.add(friendsData)
+            try realm.commitWrite()
+        } catch {
+            print("DBG", error)
+        }
+    }
+    
+    
     /// Fetching friends data
     /// - Parameter completion: closure for extracting result
     func loadFriendVK(completion: @escaping (FriendsResult) -> ()) {
         guard let token = MySession.shared.token else {
             return completion(.failure(.notConfigureURL))
         }
-
+        
         let params: [String: String] = [
             "v" : "5.131",
-            "fields": "bdate, photo_100, online"
+            "fields": "photo_100"
         ]
-
+        
         do {
             let url: URL = try .configureUrl(token: token,
                                              method: .friendsGet,
@@ -46,7 +63,7 @@ final class FriendService {
                 let decoder = JSONDecoder()
                 
                 do {
-                    let result = try decoder.decode(UserVK.self, from: data)
+                    let result = try decoder.decode(FResponse.self, from: data)
                     completion(.success(result.response.items))
                     
                 } catch {

@@ -6,80 +6,43 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// model for landing JSON data for friends
-class UserVK: Codable {
-    
-    /// response
-    let response: ResponseFriends
+struct FResponse: Decodable {
+    let response: FriendsListResponse
 }
 
 /// model for landing JSON data for friends
-struct ResponseFriends: Codable {
-    
-    /// users count
-    let count: Int
-    
-    ///  array of users
-    let items: [UserData]
+struct FriendsListResponse: Decodable {
+    /// array of friends
+    let items: [FriendsData]
 }
 
 /// model for landing JSON data for friends
-struct UserData: Codable {
+class FriendsData: Object, Decodable {
     
-    /// user ID, information about the communities
-    let id: Int
+    /// user id
+    @objc dynamic var id: Int = 0
     
-    /// user date of birth
-    let birthday: String?
+    /// user's photo
+    @objc dynamic var photo100: String = ""
     
-    /// user first name
-    let firstName: String
+    /// user's first name
+    @objc dynamic var firstName: String = ""
     
-    /// user last name
-    let lastName: String
-    
-    /// user icon
-    let photo100: String
+    /// user's last name
+    @objc dynamic var lastName: String = ""
     
     enum CodingKeys: String, CodingKey {
         case id
-        case birthday = "bdate"
         case firstName = "first_name"
         case lastName = "last_name"
         case photo100 = "photo_100"
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
+    
 }
-
-
-//class FLResponse: Decodable {
-//    let response: FriendsPhotosResponse
-//}
-//
-//class FriendsListResponse: Decodable {
-//    let items: [FriendsList]
-//}
-//
-//class FriendsList: Decodable {
-//    var id = 0
-//    var birthday = ""
-//    var photo100 = ""
-//    var firstName = ""
-//    var lastName = ""
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case birthday = "bdate"
-//        case photo100 = "photo_100"
-//        case firstName = "first_name"
-//        case lastName = "last_name"
-//
-//    }
-//
-//    convenience required init(from decoder: Decoder) throws {
-//        self.init()
-//        let values = try decoder.container(keyedBy: CodingKeys.self)
-//        self.
-//    }
-//
-//}

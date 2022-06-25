@@ -6,66 +6,37 @@
 //
 
 import Foundation
+import RealmSwift
 
 /// model for landing JSON data for groups
-struct GroupsVK: Codable {
+struct GroupsVK: Decodable {
     let response: ResponseGroups
 }
 
 /// model for landing JSON data for groups
-struct ResponseGroups: Codable {
+struct ResponseGroups: Decodable {
     let items: [GroupData]
 }
 
 /// model for landing JSON data for groups
-struct GroupData: Codable {
+class GroupData: Object, Decodable {
     
     /// group identification number
-    let id: Int
+    @objc dynamic var id = 0
     
     /// group name
-    let name: String
-    
-    /// group type: groupe, page, event
-    let type: TypeEnum
-    
+    @objc dynamic var name = ""
+
     /// group icon
-    let photo100: String
+    @objc dynamic var photo100 = ""
     
     enum CodingKeys: String, CodingKey {
         case id
         case name = "name"
-        case type = "type"
         case photo100 = "photo_100"
     }
+    
+    override class func primaryKey() -> String? {
+        "id"
+    }
 }
-
-enum TypeEnum: String, Codable {
-    case group = "group"
-    case page = "page"
-}
-
-
-
-
-//class GroupsResponse: Decodable {
-//    let items: [Groups]
-//}
-//
-//class Groups: Decodable {
-//    var id = 0
-//    var description = ""
-//    var membersCount = 0
-//    var name = ""
-//    var type = ""
-//    var photo100 = ""
-//
-//    enum CodingKeys: String, CodingKey {
-//        case id
-//        case description
-//        case membersCount = "members_count"
-//        case name
-//        case type
-//        case photo100 = "photo_100"
-//    }
-//}

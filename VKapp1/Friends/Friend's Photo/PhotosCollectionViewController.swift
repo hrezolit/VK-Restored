@@ -11,7 +11,7 @@ import UIKit
 class PhotosCollectionViewController: UICollectionViewController {
     
     var friendIndex: Int = 0
-    var photoOwnerID: Int?
+    var photoOwnerID: Int = 0
     
     let photoService = PhotoService()
     var photoData = [PhotosData]()
@@ -19,7 +19,7 @@ class PhotosCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        guard let photoOwnerID = photoOwnerID else { return }
+//        guard let photoOwnerID = photoOwnerID else { return }
         
         photoService.loadPhotoVK(ownerID: photoOwnerID) { result in
             switch result {
@@ -46,9 +46,10 @@ class PhotosCollectionViewController: UICollectionViewController {
             .map { $0.sizes }
             .flatMap { $0 }
             .filter { $0.type == "r" }
+//        let likes = photoData.map {$0.likes }.flatMap { $0 }
         
         cell?.friendPhotos.loadImage(with: photoR[indexPath.item].url)
-//        cell?.likeControl.isSelected = photoR.isLiked
+//        cell?.likeControl.isSelected = likes
 //        cell?.markedAsLiked = { isSelected in
 //            photoData[self.friendIndex].likes[indexPath.row] = isSelected
 //        }
@@ -58,7 +59,11 @@ class PhotosCollectionViewController: UICollectionViewController {
     //MARK: - prepare for segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let swipeViewController = segue.destination as? PhotoSwipeViewController {
-            swipeViewController.photos = photoData
+            let photoR = photoData
+                .map { $0.sizes }
+                .flatMap { $0 }
+                .filter { $0.type == "r" }
+            swipeViewController.photos = photoR
             navigationController?.navigationBar.tintColor = .clear
             navigationController?.navigationItem.titleView?.backgroundColor = .clear
             
